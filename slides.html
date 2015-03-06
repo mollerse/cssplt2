@@ -1,0 +1,411 @@
+<style>
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .light {
+    background: #e4ebee;
+    color: #1c202b;
+  }
+
+  .emphasis {
+    background: #fb544d;
+    color: #fff;
+  }
+
+  .emphasis h1,
+  .emphasis h2,
+  .emphasis h3,
+  .emphasis h4 {
+    color: #1c202b;
+  }
+
+  .light h1,
+  .light h2,
+  .light h3,
+  .light h4 {
+    color: #1c202b;
+  }
+
+  .dark {
+    background: #1c202b;
+  }
+
+  .reveal .subtitle {
+    font-family: 'Jaapokki-regular', sans-serif;
+  }
+
+  .slides>section {
+    padding: 1% !important;
+  }
+
+  .midten {
+    height: 100%;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .midten > * {
+    text-align: center !important;
+  }
+
+  h1, h2, h3, h4 {
+    text-align: left;
+  }
+
+  .reveal p {
+    font-size: 150%;
+    text-align: left;
+  }
+  span.uthev {
+    color: #fb544d;
+  }
+
+  img {
+    border: none !important;
+    background: inherit !important;
+    box-shadow: none !important;
+  }
+
+  .strike.visible:not(.current-fragment) {
+    text-decoration: line-through;
+  }
+
+  code:after {
+    position: absolute;
+    display: block;
+    color: white;
+    top: 2vh;
+    right: 0.5vw;
+    text-align: right;
+    font-size: 150%;
+    font-family: 'Jaapokki-regular', sans-serif;
+  }
+
+  code.css:after {
+    content: "CSS";
+  }
+
+  code.html:after {
+    content: "HTML";
+  }
+
+  code.javascript:after {
+    content: "JS";
+  }
+
+  .big {
+    font-size: 9vh !important;
+  }
+
+  pre {
+    min-height: 15vh !important;
+    display: flex !important;
+    background: black;
+  }
+
+  code {
+    margin: auto 0 !important;
+  }
+
+</style>
+
+<section class="midten">
+  <h2>CSS</h2>
+  <h3>&mdash;</h3>
+  <h2>Et programmerings-teoretisk skråblikk</h2>
+  <h7>Stian Veum Møllersen / @mollerse</h7>
+  <h7>BEKK</h7>
+  <aside class="notes">
+    <p>
+      Hei, jeg heter Stian og jeg skal gi dere et skråblikk på CSS fra en
+programmeringsteoretisk synsvinkel.
+    </p>
+    <p>
+      Vi sier ofte at CSS ikke er et programmeringspråk, men likevel bruker vi det til å
+løse den samme typen problemer som vi bruker programmeringspråk til. Derfor er
+det nyttig å se på mekanismene i CSS på et mer teoretisk nivå og se hva vi kan
+ta med oss av lærdom fra programmeringspråk.
+    </p>
+  </aside>
+</section>
+
+<section class="midten">
+  <h2>KOMPOSISJON</h2>
+  <aside class="notes">
+    <p>
+      Hoved temaet i dag er komposisjon. Den kanskje mest fundamentale delen av programmering
+    </p>
+    <p>
+      I dag skal vi se litt på komposisjon. Den kanskje mest fundamentale delen av
+programmering som går igjen på tvers av alle programmeringspråk.
+    </p>
+  </aside>
+</section>
+
+<section class="midten light" data-background="#e4ebee">
+  <p>Komposisjon er å sette sammen <span class="uthev">løsninger</span> på <span class="uthev">enklere</span> delproblemer for å løse et mer <span class="uthev">komplekst</span> problem.</p>
+  <aside class="notes">
+    <p>
+      Hovedtemaet i dag er komposisjon. Den kanskje mest fundamentale delen av
+programmering slik vi kjenner det. Komposisjon danner grunnlaget for det
+arbeidet vi gjør som utviklere. Muligheten til å kunne bryte ned komplekse
+problemer og bygge på tidligere løste problemer er helt essensiell. Uten denne
+muligheten er det ikke vært mulig å angripe problemer uten å til en hver tid ta
+inn over seg hele kompleksiteten til problemet. Dette er noe vi vet ikke
+skalerer særlig bra når kompleksiteten eller omfanget til et problem blir stort.
+    </p>
+  </aside>
+</section>
+
+<section>
+  <h2>Komposisjon</h2>
+  <p>
+    <code>y = x * x + 1</code>
+  </p>
+  <div class="big">
+    <pre class="fragment"><code class="javascript">function f(x) { return x + 1; }
+function g(x) { return x * x; }</code></pre>
+    <pre class="fragment"><code class="javascript">var y = f(g(2)); //=> 5</code></pre>
+  </div>
+  <aside class="notes">
+    <p>
+      Komposisjon i sin mest grunnleggende form stammer fra matematikken og måten
+komplekse regnestykker kan brytes opp og løses hver for seg før den endelige
+løsningen presenterer seg ved å sette sammen delløsningene.
+    </p>
+</aside>
+</section>
+
+<section>
+  <h2>Komposisjon i CSS</h2>
+  <div class="big">
+    <pre><code>.btn {
+  color: red;
+  background: silver;
+  display: inline-block;
+}</pre></code>
+  <pre class="fragment"><code>.sidebar .btn {
+  color: black;
+  background: red;
+}</code></pre>
+<pre class="fragment"><code class="html"><div class="sidebar">
+  <button class="btn">Pressme</button>
+</div></code></pre>
+  </div>
+  <aside class="notes">
+    <p>
+      Selv om vi ofte ikke ser på CSS som et programmeringspråk så angriper vi ofte
+problemene vi blir møtt med ved å benytte taktikker vi kjenner godt fra andre
+kontekster.
+    </p>
+    <p>
+      Her har vi laget oss en løsning på hvordan buttons skal se ut. Og så lager vi
+oss en løsning på et spesialtilfelle av buttons som eksisterer i sidebars ved å
+bygge på løsningen for generelle buttons.
+    </p>
+    <p>
+      Så kan vi benytte oss av den løsningen på denne biten med markup. Dette er en
+ganske vanlig måte å angripe CSS-problemer på.
+    </p>
+  </aside>
+</section>
+
+<section>
+  <h2>Komposisjon i CSS</h2>
+  <pre><code class="display-lang css">.sidebar .header {
+  font-weight: 700;
+  text-decoration: underline;
+}
+.news-item h2 {
+  color: blue;
+}</code></pre>
+  <pre class="fragment"><code class="display-lang html"><div class="sidebar">
+
+  <h1 class="header">Sidebar</h1>
+
+  <div class="news-item">
+
+    <h2 class="header">News</h2>
+    <p>There were news.</p>
+
+  </div>
+</div></code></pre>
+  <aside class="notes">
+    <p>
+      Vi ser på et litt mer komplekst eksempel. Dette er en ganske uskyldig bit med
+CSS. Vi ønsker oss feite headers med understreker. Og i sidebars ønsker vi oss
+blå h2er.
+    </p>
+    <p>
+      Når vi anvender disse css-reglene på markup som ser slik ut får vi et resultat
+som kanskje ikke var helt tiltenkt. Den innerste h2'en i news-item-div'en har
+fått det samme utseende som den ytterste headeren.
+    </p>
+    <p>
+      Dette er ikke et helt uvanlig problem i CSS. En del av markupen gir match på to
+ulike CSS-regler og vi får en uønsket effekt ved at stilene fra begge reglene
+blir satt på elementet. Vi har nå komponert to løsninger fra CSS, uten å
+egentlig mene det!
+    </p>
+  </aside>
+</section>
+
+<section>
+  <h2>Løsning?</h2>
+  <p>
+    Vi trenger å kontrollere effekten av en CSS-regel.
+  </p>
+  <aside class="notes">
+    <p>
+      Vi ønsker ikke at stilene fra den første regelen skal påvirke effekten av den
+andre regelen. Det vi trenger er en måte å kontrollere effekten når vi
+komponerer løsninger ved å løse delproblemer.
+    </p>
+    <p>
+      Hadde CSS vært som andre programmeringspråk hadde vi kunnet begrense scopet til
+en av reglene. Vi kunne sagt at denne regelen kun gjelder for denne avgrensa
+biten med markup, men den muligheten har vi ikke per i dag.
+    </p>
+  </aside>
+</section>
+
+  <section>
+    <h2>Løsning?</h2>
+    <pre class="fragment"><code class="display-lang css">.sidebar .header {
+  font-weight: 700;
+  text-decoration: underline;
+}
+.news-item h2 {
+  font-weight: normal;
+  text-decoration: none;
+  color: blue;
+}</code></pre>
+  <aside class="notes">
+    <p>
+      Alle CSS-regler eksisterer i praksis i samme namespace, og i en ytterste
+konsekvens er effekten av en CSS-regel avhengig av alle de andre CSS-reglene som
+er definert på en side. I dette eksempelet ser vi effekten av dette, da regelen
+for h2er i news-items blir påvirket av en annen regel.
+    </p>
+    <p>
+      Vi kan fikse dette ved å være eksplisitte med stilene vi ønsker å sette,
+men dette vil fortsatt ikke gi oss den effekten vi ønsker.
+    </p>
+  </aside>
+</section>
+
+<section>
+  <h2>Løsning?</h2>
+  <pre class="fragment"><code class="display-lang css">.sidebar .header {
+  font-weight: 700;
+  text-decoration: underline;
+}
+.news-item .header {
+  font-weight: normal;
+  text-decoration: none;
+  color: blue;
+}</code></pre>
+  <aside class="notes">
+    <p>
+      Vi er nødt til å benytte oss av den mekanismen vi faktisk har for å kontrollere
+effekten av komposisjon, som er spesifisitet. Vi kan kaste så mange
+preprosessorer på CSS som vi vil, men denne fundamentale egenskapen vil ikke
+endre seg.
+    </p>
+    <p>
+      Dette eksempelet er konstruert, men det illustrerer en viktig egenskap med CSS.
+Vi kan ikke løse problemer med CSS ved å angripe problemet med de samme
+teknikkene som fungerer i andre programmeringspråk.
+    </p>
+  </aside>
+</section>
+
+<section class="midten emphasis" data-background="#fb544d">
+  <h3>CSS oppfyller ikke forutsetningene for komposisjon som problemløsningstrategi.</h3>
+  <aside class="notes">
+    <p>
+      Den fundamentale forutsetningen for at komposisjon skal fungere som strategi for
+problemløsning er ikke oppfylt av CSS. Vi kan ikke dele opp et problem i mindre
+problemer uten å alltid ha hele problemet i hodet til en hver tid. Jo mer
+kompleks problemet er jo vanskligere blir det å holde i hodet. Hvis vi angriper
+problemer i CSS uten å erkjenne de faktiske forhold vil vi ikke være istand til å
+utvikle løsninger effektivt.
+    </p>
+  </aside>
+</section>
+
+<section>
+  <h2>Er CSS håpløst?</h2>
+  <p>
+    Vi har to retninger vi kan velge:
+  </p>
+  <br>
+  <p class="fragment">
+    1) Slutte med komposisjon.
+  </p>
+  <br>
+  <p class="fragment">
+    2) Eliminere uønskede effekter fra komposisjon.
+  </p>
+  <aside class="notes">
+    <p>
+      Er CSS håpløst og helt uegna til å løse de problemene vi ønsker å løse? Ikke
+nødvendigvis, men vi er nødt til å angripe problemer på en annen måte. La oss se
+på to mulige retninger.
+    </p>
+    <p>
+      Vi kan slutte å komponere CSS regler. Det vil si at vi heller lager
+regler som kun treffer akkurat de elementene vi ønsker gjennom feks unike eller
+nesten unike selectorer som inneholder alle attributter som skal settes for det
+elementet.
+    </p>
+    <p>
+      Eller vi forsøker å eliminere uønskede effekter ved komposisjon gjennom å begrense
+effekten av hver regel slik at når flere regler matcher samme element vil ikke
+reglene påvirke hverandre. Med andre ord, vi har ikke lengre har lov til å
+overskrive en stil fra en annen regel selv om du har høyere spesifisitet.
+Tatt til det ekstreme vil dette si at du kun kan sette en attributt per regel.
+    </p>
+  </aside>
+</section>
+
+<section>
+  <h2>Det er håp</h2>
+  <p>
+    Vi må jobbe på CSS' premisser.
+  </p>
+  <aside class="notes">
+    <p>
+      Det er håp. Vi trenger kanskje ikke å ta noen av de to retningene til sine
+ekstremer, men vi kan la de danne et grunnlag for hvordan vi vurderer
+struktureringen av løsninger på komplekse problemer med CSS.
+    </p>
+    <p>
+      Alt etter hvilken grad av kompleksitet vi er møtt med kan vi ta med oss
+elementer fra en eller begge retningene og angripe problemene på CSS' premisser.
+Vi blir i stand til å identifisere når løsningene våre trenger en
+omstrukturering, fremfor å ofre godt håndtverk. Og vi blir i stand til å
+vurdere hvorvidt en foreslått løsning vil kunne fungere for problemet vi har.
+    </p>
+  </aside>
+</section>
+
+<section class="midten light" data-background="#1c202b">
+  <h2><span class="uthev">Forståelse</span> for CSS' begrensninger hjelper oss til å ta de <span class="uthev">riktige</span> valgene.</h2>
+  <aside class="notes">
+    <p>
+      Når vi forstår hvilke begrensninger CSS har og hvordan de påvirker de løsningene
+vi lager blir vi i stand til å ta de rette valgene for hvordan vi utformer
+løsninger.
+    </p>
+  </aside>
+</section>
+
+<section class="midten">
+  <h1>TAKK FOR MEG</h1>
+  <p>Stian Veum Møllersen / @mollerse</p>
+  <p>BEKK</p>
+</section>
